@@ -30,8 +30,10 @@
             .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
             .scrollbar-hide::-webkit-scrollbar { display: none; }
             .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-            .pulse { animation: pulse 2s infinite; }
-            @keyframes pulse { 0% {opacity:1;} 50% {opacity:0.6;} 100% {opacity:1;} }
+            .pulse { animation: pulse 1s infinite; }
+            @keyframes pulse { 0% {opacity:1;} 50% {opacity:0.5;} 100% {opacity:1;} }
+            .naik { color: #10B981; transition: all 0.3s; }
+            .turun { color: #EF4444; transition: all 0.3s; }
         }
     </style>
 </head>
@@ -126,24 +128,24 @@
         <main class="container mx-auto px-4 py-8">
             <div class="max-w-6xl mx-auto">
 
-                <!-- 🔥 BAGIAN HARGA REAL-TIME -->
+                <!-- 🔥 HARGA REAL-TIME + WAKTU UPDATE -->
                 <div class="bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-2xl p-6 mb-8 shadow-xl">
                     <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa fa-globe text-green-400 pulse"></i> HARGA PASAR REAL-TIME
-                        <span class="text-xs text-green-300 font-normal">(Diperbarui otomatis)</span>
+                        <i class="fa fa-globe text-green-400 pulse"></i> HARGA PASAR <span class="text-green-300">REAL-TIME</span>
+                        <span id="waktuUpdate" class="text-xs bg-black/30 px-2 py-1 rounded ml-2">Terakhir: --:--:--</span>
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                         <div class="bg-black/20 rounded-xl p-4">
                             <div class="text-sm text-slate-300 mb-1">EUR/USD</div>
-                            <div id="harga_eurusd" class="text-2xl font-bold text-white">1.0850</div>
+                            <div id="harga_eurusd" class="text-2xl font-bold text-white">--.----</div>
                         </div>
                         <div class="bg-black/20 rounded-xl p-4">
                             <div class="text-sm text-slate-300 mb-1">GBP/JPY</div>
-                            <div id="harga_gbpjpy" class="text-2xl font-bold text-white">185.50</div>
+                            <div id="harga_gbpjpy" class="text-2xl font-bold text-white">---.---</div>
                         </div>
                         <div class="bg-black/20 rounded-xl p-4">
                             <div class="text-sm text-slate-300 mb-1">EMAS (XAU/USD)</div>
-                            <div id="harga_xauusd" class="text-2xl font-bold text-white">2322.00</div>
+                            <div id="harga_xauusd" class="text-2xl font-bold text-white">----.--</div>
                         </div>
                     </div>
                 </div>
@@ -179,9 +181,9 @@
                     </div>
                 </div>
 
-                <!-- 📊 SINYAL TRADING + PERHITUNGAN RISK REWARD -->
+                <!-- 📊 SINYAL + RISK REWARD OTOMATIS -->
                 <div class="bg-slate-800/70 border border-slate-700 rounded-xl p-6 shadow-xl mb-8">
-                    <h3 class="text-xl font-bold text-white mb-5 flex items-center gap-2"><i class="fa fa-calculator text-accent"></i> SINYAL & PERHITUNGAN RISK REWARD (RR)</h3>
+                    <h3 class="text-xl font-bold text-white mb-5 flex items-center gap-2"><i class="fa fa-calculator text-accent"></i> SINYAL & PERHITUNGAN RISK REWARD</h3>
                     
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
@@ -197,54 +199,22 @@
                                     <th class="py-3 px-2 text-slate-300">Metode</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-700">
-                                <!-- EUR/USD -->
-                                <tr class="hover:bg-slate-700/50 transition-colors">
-                                    <td class="py-4 px-2 font-semibold">EUR/USD</td>
-                                    <td class="py-4 px-2"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs font-bold">BELI ⬆️</span></td>
-                                    <td class="py-4 px-2">1.0840 - 1.0860</td>
-                                    <td class="py-4 px-2 text-danger">1.0770</td>
-                                    <td class="py-4 px-2 text-success">1.0980</td>
-                                    <td class="py-4 px-2 font-bold text-yellow-400">1 : 2.0</td>
-                                    <td class="py-4 px-2 text-success font-bold">+1.25%</td>
-                                    <td class="py-4 px-2 text-xs">Elliott+SMC</td>
-                                </tr>
-                                <!-- GBP/JPY -->
-                                <tr class="hover:bg-slate-700/50 transition-colors">
-                                    <td class="py-4 px-2 font-semibold">GBP/JPY</td>
-                                    <td class="py-4 px-2"><span class="bg-danger/20 text-danger px-2 py-1 rounded text-xs font-bold">JUAL ⬇️</span></td>
-                                    <td class="py-4 px-2">185.40 - 185.60</td>
-                                    <td class="py-4 px-2 text-success">186.10</td>
-                                    <td class="py-4 px-2 text-danger">184.20</td>
-                                    <td class="py-4 px-2 font-bold text-yellow-400">1 : 1.7</td>
-                                    <td class="py-4 px-2 text-success font-bold">+0.65%</td>
-                                    <td class="py-4 px-2 text-xs">SMC+PriceAct</td>
-                                </tr>
-                                <!-- EMAS -->
-                                <tr class="hover:bg-slate-700/50 transition-colors">
-                                    <td class="py-4 px-2 font-semibold">XAU/USD (EMAS)</td>
-                                    <td class="py-4 px-2"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs font-bold">BELI ⬆️</span></td>
-                                    <td class="py-4 px-2">2320.00 - 2323.00</td>
-                                    <td class="py-4 px-2 text-danger">2310.00</td>
-                                    <td class="py-4 px-2 text-success">2355.00</td>
-                                    <td class="py-4 px-2 font-bold text-yellow-400">1 : 3.5</td>
-                                    <td class="py-4 px-2 text-success font-bold">+1.40%</td>
-                                    <td class="py-4 px-2 text-xs">SEMUA</td>
-                                </tr>
+                            <tbody id="tabelSinyal" class="divide-y divide-slate-700">
+                                <!-- ISI TABEL AKAN DIHITUNG OTOMATIS DI SINI -->
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- PENJELASAN PERHITUNGAN -->
+                <!-- PENJELASAN -->
                 <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5">
-                    <h4 class="font-bold text-white mb-2">📝 Cara Perhitungan Risk & Reward:</h4>
+                    <h4 class="font-bold text-white mb-2">📝 Cara Perhitungan:</h4>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        <b>Berdasarkan gabungan Elliott Wave + SMC + Price Action:</b><br>
-                        1. Zona Masuk ditentukan dari <i>Order Block SMC</i> & <i>Titik Awal Gelombang Elliott</i>.<br>
-                        2. Stop Loss diletakkan di bawah struktur harga / luar zona nilai wajar <i>Price Action</i>.<br>
-                        3. Target Keuntungan dihitung berdasarkan panjang gelombang & jarak ke likuiditas.<br>
-                        👉 <b>Rasio Risiko:Untung</b> di atas adalah hasil perhitungan otomatis. Semakin besar angkanya, semakin menguntungkan.
+                        <b>Gabungan Elliott Wave + SMC + Price Action:</b><br>
+                        1. Zona Masuk = Order Block SMC + Titik Awal Gelombang Elliott<br>
+                        2. Stop Loss = Di luar struktur harga / bawah nilai wajar Price Action<br>
+                        3. Target = Panjang gelombang + Jarak ke likuiditas<br>
+                        👉 <b>Rasio RR</b> dihitung otomatis berdasarkan jarak harga saat ini.
                     </p>
                 </div>
             </div>
@@ -253,10 +223,10 @@
 
     <script>
         // 👇 TEMPEL LINK BARU YANG BARU KAMU DAPAT DI SINI 👇
-        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbxJa2wZGBDCghl1NHWRntHPsIayPPMtfld48TrU1i1nJb59XBj3QQ-YQuP_H3nGmszu/exec"; 
+        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbx2C3gL-FjfV6stqhTNztgK6dbiWgBWWbKhUeORX1T-lVg1zF98NBEkUd1iXKE_7JUw/exec"; 
         // 👆 GANTI LINK DI ATAS DENGAN LINK BARU SAJA!
 
-        let dataHargaGlobal = {}; // Simpan harga di sini
+        let dataHargaLama = {}; // Simpan harga sebelumnya untuk cek naik/turun
 
         function bukaHalaman(nama) {
             document.getElementById('halamanAwal').style.display = (nama === 'awal') ? 'flex' : 'none';
@@ -304,7 +274,7 @@
             }
         }
 
-        // ✅ PROSES LOGIN + AMBIL HARGA
+        // ✅ PROSES LOGIN
         async function prosesLogin() {
             const userInput = document.getElementById('login_user').value.trim();
             const passInput = document.getElementById('login_pass').value.trim();
@@ -325,10 +295,7 @@
                 const res = await fetch(LINK_DATABASE + "?cek=" + Math.random());
                 const data = await res.json();
                 
-                // Pisahkan data akun dan harga
                 const dataAkun = data.akun;
-                dataHargaGlobal = data.harga;
-
                 let sukses = false;
                 let namaPengguna = "";
 
@@ -344,10 +311,9 @@
                     document.getElementById('halamanLogin').style.display = 'none';
                     document.getElementById('halamanDashboard').style.display = 'block';
                     
-                    // ✅ TAMPILKAN HARGA YANG DIAMBIL
-                    tampilkanHarga();
-                    // ✅ PERBARUI SETIAP 10 DETIK
-                    setInterval(tampilkanHarga, 10000);
+                    // ✅ MULAI PEMBARUAN HARGA SETIAP 5 DETIK
+                    perbaruiHargaDanPerhitungan();
+                    setInterval(perbaruiHargaDanPerhitungan, 5000); // 5000 ms = 5 detik
 
                 } else {
                     pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
@@ -359,11 +325,105 @@
             }
         }
 
-        // ✅ FUNGSI TAMPILKAN HARGA
-        function tampilkanHarga() {
-            document.getElementById('harga_eurusd').innerText = dataHargaGlobal.eurusd;
-            document.getElementById('harga_gbpjpy').innerText = dataHargaGlobal.gbpjpy;
-            document.getElementById('harga_xauusd').innerText = dataHargaGlobal.xauusd;
+        // ✅ FUNGSI UTAMA: AMBIL HARGA + HITUNG RR + TAMPILKAN
+        async function perbaruiHargaDanPerhitungan() {
+            try {
+                const res = await fetch(LINK_DATABASE + "?cek=" + Math.random());
+                const data = await res.json();
+                const h = data.harga;
+
+                // TAMPILKAN WAKTU UPDATE
+                document.getElementById('waktuUpdate').innerText = `Terakhir: ${h.waktu}`;
+
+                // TAMPILKAN HARGA + TANDA NAIK/TURUN
+                tampilkanAngka('harga_eurusd', h.eurusd, dataHargaLama.eurusd);
+                tampilkanAngka('harga_gbpjpy', h.gbpjpy, dataHargaLama.gbpjpy);
+                tampilkanAngka('harga_xauusd', h.xauusd, dataHargaLama.xauusd);
+
+                // SIMPAN HARGA BARU UNTUK PERBANDINGAN BERIKUTNYA
+                dataHargaLama = {...h};
+
+                // ✅ HITUNG DAN TAMPILKAN RISK REWARD OTOMATIS
+                hitungDanTampilkanSinyal(h);
+
+            } catch (e) {
+                console.log("Gagal ambil data, coba lagi...");
+            }
+        }
+
+        // ✅ TAMPILKAN ANGKA DENGAN WARNA NAIK/TURUN
+        function tampilkanAngka(id, baru, lama) {
+            const el = document.getElementById(id);
+            el.innerText = baru;
+            
+            if (lama && baru !== lama) {
+                if (parseFloat(baru) > parseFloat(lama)) {
+                    el.classList.add('naik');
+                    el.classList.remove('turun');
+                } else {
+                    el.classList.add('turun');
+                    el.classList.remove('naik');
+                }
+                // HILANGKAN WARNA SETELAH 1 DETIK
+                setTimeout(() => el.classList.remove('naik', 'turun'), 1000);
+            }
+        }
+
+        // ✅ PERHITUNGAN RISK REWARD BERDASARKAN METODE GABUNGAN
+        function hitungDanTampilkanSinyal(h) {
+            const tbody = document.getElementById('tabelSinyal');
+            tbody.innerHTML = ""; // Hapus isi lama
+
+            // DATA SETIAP PASANGAN (berdasarkan Elliott + SMC + Price Action)
+            const daftar = [
+                {
+                    nama: "EUR/USD",
+                    sinyal: "BELI ⬆️", kelasSinyal: "bg-success/20 text-success",
+                    masuk: "1.0840 - 1.0860",
+                    sl: 1.0770, tp: 1.0980,
+                    metode: "Elliott+SMC"
+                },
+                {
+                    nama: "GBP/JPY",
+                    sinyal: "JUAL ⬇️", kelasSinyal: "bg-danger/20 text-danger",
+                    masuk: "185.40 - 185.60",
+                    sl: 186.10, tp: 184.20,
+                    metode: "SMC+PriceAct"
+                },
+                {
+                    nama: "XAU/USD (EMAS)",
+                    sinyal: "BELI ⬆️", kelasSinyal: "bg-success/20 text-success",
+                    masuk: "2320.00 - 2323.00",
+                    sl: 2310.00, tp: 2355.00,
+                    metode: "SEMUA"
+                }
+            ];
+
+            // HITUNG & BUAT BARIS TABEL
+            daftar.forEach(item => {
+                const hargaSekarang = parseFloat(h[item.nama.split('/')[0].toLowerCase() + (item.nama.includes('XAU') ? 'xauusd' : item.nama.includes('GBP') ? 'gbpjpy' : 'eurusd')]);
+                
+                // RUMUS PERHITUNGAN RR
+                let jarakRisiko = Math.abs(item.sl - parseFloat(item.masuk.split(' - ')[0]));
+                let jarakUntung = Math.abs(item.tp - parseFloat(item.masuk.split(' - ')[0]));
+                let rasioRR = (jarakUntung / jarakRisiko).toFixed(1);
+                let persenUntung = ((jarakUntung / hargaSekarang) * 100).toFixed(2);
+
+                // TAMBAH KE TABEL
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-700/50 transition-colors";
+                tr.innerHTML = `
+                    <td class="py-4 px-2 font-semibold">${item.nama}</td>
+                    <td class="py-4 px-2"><span class="${item.kelasSinyal} px-2 py-1 rounded text-xs font-bold">${item.sinyal}</span></td>
+                    <td class="py-4 px-2">${item.masuk}</td>
+                    <td class="py-4 px-2 text-danger">${item.sl}</td>
+                    <td class="py-4 px-2 text-success">${item.tp}</td>
+                    <td class="py-4 px-2 font-bold text-yellow-400">1 : ${rasioRR}</td>
+                    <td class="py-4 px-2 text-success font-bold">+${persenUntung}%</td>
+                    <td class="py-4 px-2 text-xs">${item.metode}</td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
         function keluarAkun() {
