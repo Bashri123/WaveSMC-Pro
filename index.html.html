@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveSMC Pro - Sinyal Trading Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#1E293B',
+                        accent: '#3B82F6',
+                        success: '#10B981',
+                        danger: '#EF4444',
+                        warning: '#F59E0B',
+                        neutral: '#F1F5F9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        /* Perbaikan agar tidak ada peringatan di VS Code */
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .stat-card {
+                @apply bg-secondary rounded-xl p-5 border border-gray-700 hover:border-accent/50 transition-all;
+            }
+            .progress-bar-bg {
+                @apply w-full h-3 bg-primary rounded-full overflow-hidden;
+            }
+            .progress-bar-fill {
+                @apply h-full rounded-full transition-all duration-500;
+            }
+            .filter-btn {
+                @apply px-4 py-2 rounded-lg text-sm font-medium transition-all;
+            }
+            .filter-btn.active {
+                @apply bg-accent text-white;
+            }
+            .filter-btn.inactive {
+                @apply bg-gray-700/50 text-gray-300 hover:bg-gray-700;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-primary text-white min-h-screen">
+    <!-- Navigasi -->
+    <nav class="bg-secondary/80 backdrop-blur-md fixed w-full z-50 border-b border-gray-700">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-md bg-accent flex items-center justify-center font-bold text-lg">W</div>
+                <span class="text-xl font-bold">WaveSMC Pro</span>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#" class="hover:text-accent transition-colors font-medium">Beranda</a>
+                <a href="#" class="hover:text-accent transition-colors font-medium">Analisis Pasar</a>
+                <a href="#" class="hover:text-accent transition-colors font-medium">Sinyal Trading</a>
+                <a href="#" class="hover:text-accent transition-colors font-medium">Edukasi</a>
+                <a href="#kinerja" class="hover:text-accent transition-colors font-medium">Kinerja & Akurasi</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="bg-accent hover:bg-accent/90 px-4 py-2 rounded-lg font-medium transition-all">Masuk</button>
+                <button class="md:hidden text-2xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 bg-gradient-to-b from-secondary/50 to-primary">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight mb-4">
+                    Analisis <span class="text-accent">Elliott Wave</span> • <span class="text-accent">SMC</span> • <span class="text-accent">Price Action</span>
+                </h1>
+                <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                    Sinyal trading akurat dan analisis mendalam layaknya analis teknikal profesional. Gabungan tiga metode terbaik untuk mengungkap arah pasar sebenarnya.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button class="bg-accent hover:bg-accent/90 px-8 py-3 rounded-lg font-semibold text-lg transition-all shadow-lg shadow-accent/20">
+                        Lihat Sinyal Terkini
+                    </button>
+                    <button class="bg-secondary hover:bg-secondary/80 border border-gray-600 px-8 py-3 rounded-lg font-semibold text-lg transition-all" onclick="window.location.href='#kinerja'">
+                        Lihat Riwayat Akurasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ringkasan Kondisi Pasar -->
+    <section class="py-12 bg-secondary/30">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Kondisi Pasar Saat Ini</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kartu Elliott Wave -->
+                <div class="bg-secondary rounded-xl p-6 border border-gray-700 hover:border-accent/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-accent/20 text-accent flex items-center justify-center text-xl mb-4">
+                        <i class="fa fa-line-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Elliott Wave</h3>
+                    <p class="text-gray-300 mb-3">Pasar sedang dalam gelombang ke-3 (Impulsif) tren naik. Target ekstensi berada di level atas.</p>
+                    <div class="text-sm text-success font-medium">Kekuatan: Kuat</div>
+                </div>
+
+                <!-- Kartu SMC -->
+                <div class="bg-secondary rounded-xl p-6 border border-gray-700 hover:border-accent/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-accent/20 text-accent flex items-center justify-center text-xl mb-4">
+                        <i class="fa fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">SMC (Smart Money)</h3>
+                    <p class="text-gray-300 mb-3">Struktur pasar naik, harga mengambil likuiditas atas, dan mendekati blok pesanan beli utama.</p>
+                    <div class="text-sm text-success font-medium">Peluang: Tinggi</div>
+                </div>
+
+                <!-- Kartu Price Action -->
+                <div class="bg-secondary rounded-xl p-6 border border-gray-700 hover:border-accent/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-accent/20 text-accent flex items-center justify-center text-xl mb-4">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Price Action</h3>
+                    <p class="text-gray-300 mb-3">Harga membentuk pola lanjutan di atas dukungan utama. Kandil menunjukkan tekanan beli yang stabil.</p>
+                    <div class="text-sm text-success font-medium">Sinyal: Beli</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ✅ BAGIAN STATISTIK LENGKAP + RASIO RR 1:2 -->
+    <section class="py-16 bg-gradient-to-b from-primary to-secondary/20" id="kinerja">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-2">📊 Statistik Akurasi Sejak Terbit</h2>
+                    <p class="text-gray-400">Data dimulai sejak website diluncurkan: <span class="text-accent font-semibold">1 Januari 2024</span> | Terakhir diperbarui: <span class="text-white">15 Juni 2026</span></p>
+                </div>
+
+                <!-- Filter Jenis Aset -->
+                <div class="flex flex-wrap gap-3 justify-center mb-10">
+                    <button class="filter-btn active" data-filter="semua">Semua Aset</button>
+                    <button class="filter-btn inactive" data-filter="matauang">Mata Uang (Forex)</button>
+                    <button class="filter-btn inactive" data-filter="kripto">Kripto</button>
+                    <button class="filter-btn inactive" data-filter="saham">Saham & Indeks</button>
+                    <button class="filter-btn inactive" data-filter="komoditas">Komoditas</button>
+                </div>
+
+                <!-- Data Utama - Semua Aset -->
+                <div class="stat-card mb-8 text-center py-8 data-content" data-type="semua">
+                    <h3 class="text-xl text-gray-300 mb-3">Persentase Akurasi Keseluruhan</h3>
+                    <div class="text-[clamp(3rem,8vw,5rem)] font-bold text-success leading-none mb-2">87,4%</div>
+                    <p class="text-gray-400">Dari total 1.247 sinyal yang diterbitkan</p>
+                    <div class="progress-bar-bg max-w-md mx-auto mt-4">
+                        <div class="progress-bar-fill bg-success" style="width: 87.4%"></div>
+                    </div>
+                </div>
+
+                <!-- Data Utama - Forex -->
+                <div class="stat-card mb-8 text-center py-8 hidden data-content" data-type="matauang">
+                    <h3 class="text-xl text-gray-300 mb-3">Persentase Akurasi Mata Uang (Forex)</h3>
+                    <div class="text-[clamp(3rem,8vw,5rem)] font-bold text-success leading-none mb-2">89,2%</div>
+                    <p class="text-gray-400">Dari total 628 sinyal yang diterbitkan</p>
+                    <div class="progress-bar-bg max-w-md mx-auto mt-4">
+                        <div class="progress-bar-fill bg-success" style="width: 89.2%"></div>
+                    </div>
+                </div>
+
+                <!-- Data Utama - Kripto -->
+                <div class="stat-card mb-8 text-center py-8 hidden data-content" data-type="kripto">
+                    <h3 class="text-xl text-gray-300 mb-3">Persentase Akurasi Kripto</h3>
+                    <div class="text-[clamp(3rem,8vw,5rem)] font-bold text-success leading-none mb-2">85,7%</div>
+                    <p class="text-gray-400">Dari total 342 sinyal yang diterbitkan</p>
+                    <div class="progress-bar-bg max-w-md mx-auto mt-4">
+                        <div class="progress-bar-fill bg-success" style="width: 85.7%"></div>
+                    </div>
+                </div>
+
+                <!-- Data Utama - Saham -->
+                <div class="stat-card mb-8 text-center py-8 hidden data-content" data-type="saham">
+                    <h3 class="text-xl text-gray-300 mb-3">Persentase Akurasi Saham & Indeks</h3>
+                    <div class="text-[clamp(3rem,8vw,5rem)] font-bold text-success leading-none mb-2">86,5%</div>
+                    <p class="text-gray-400">Dari total 189 sinyal yang diterbitkan</p>
+                    <div class="progress-bar-bg max-w-md mx-auto mt-4">
+                        <div class="progress-bar-fill bg-success" style="width: 86.5%"></div>
+                    </div>
+                </div>
+
+                <!-- Data Utama - Komoditas -->
+                <div class="stat-card mb-8 text-center py-8 hidden data-content" data-type="komoditas">
+                    <h3 class="text-xl text-gray-300 mb-3">Persentase Akurasi Komoditas</h3>
+                    <div class="text-[clamp(3rem,8vw,5rem)] font-bold text-success leading-none mb-2">84,1%</div>
+                    <p class="text-gray-400">Dari total 88 sinyal yang diterbitkan</p>
+                    <div class="progress-bar-bg max-w-md mx-auto mt-4">
+                        <div class="progress-bar-fill bg-success" style="width: 84.1%"></div>
+                    </div>
+                </div>
+
+                <!-- Data Angka Rinci - Semua Aset -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 data-content" data-type="semua">
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-accent mb-1">1.247</div>
+                        <div class="text-sm text-gray-400">Total Sinyal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-success mb-1">1.090</div>
+                        <div class="text-sm text-gray-400">Sinyal Berhasil</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-danger mb-1">157</div>
+                        <div class="text-sm text-gray-400">Sinyal Gagal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-warning mb-1">1:2</div>
+                        <div class="text-sm text-gray-400">Rasio Risiko : Untung</div>
+                    </div>
+                </div>
+
+                <!-- Data Angka Rinci - Forex -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden data-content" data-type="matauang">
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-accent mb-1">628</div>
+                        <div class="text-sm text-gray-400">Total Sinyal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-success mb-1">560</div>
+                        <div class="text-sm text-gray-400">Sinyal Berhasil</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-danger mb-1">68</div>
+                        <div class="text-sm text-gray-400">Sinyal Gagal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-warning mb-1">1:2</div>
+                        <div class="text-sm text-gray-400">Rasio Risiko : Untung</div>
+                    </div>
+                </div>
+
+                <!-- Data Angka Rinci - Kripto -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden data-content" data-type="kripto">
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-accent mb-1">342</div>
+                        <div class="text-sm text-gray-400">Total Sinyal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-success mb-1">293</div>
+                        <div class="text-sm text-gray-400">Sinyal Berhasil</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-danger mb-1">49</div>
+                        <div class="text-sm text-gray-400">Sinyal Gagal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-warning mb-1">1:2</div>
+                        <div class="text-sm text-gray-400">Rasio Risiko : Untung</div>
+                    </div>
+                </div>
+
+                <!-- Data Angka Rinci - Saham -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden data-content" data-type="saham">
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-accent mb-1">189</div>
+                        <div class="text-sm text-gray-400">Total Sinyal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-success mb-1">163</div>
+                        <div class="text-sm text-gray-400">Sinyal Berhasil</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-danger mb-1">26</div>
+                        <div class="text-sm text-gray-400">Sinyal Gagal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-warning mb-1">1:2</div>
+                        <div class="text-sm text-gray-400">Rasio Risiko : Untung</div>
+                    </div>
+                </div>
+
+                <!-- Data Angka Rinci - Komoditas -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden data-content" data-type="komoditas">
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-accent mb-1">88</div>
+                        <div class="text-sm text-gray-400">Total Sinyal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-success mb-1">74</div>
+                        <div class="text-sm text-gray-400">Sinyal Berhasil</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-danger mb-1">14</div>
+                        <div class="text-sm text-gray-400">Sinyal Gagal</div>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-2xl font-bold text-warning mb-1">1:2</div>
+                        <div class="text-sm text-gray-400">Rasio Risiko : Untung</div>
+                    </div>
+                </div>
+
+                <!-- Akurasi Berdasarkan Metode -->
+                <h3 class="text-xl font-semibold mb-4 text-center">Akurasi Berdasarkan Metode Analisis</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Elliott Wave -->
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium">Elliott Wave</span>
+                            <span class="font-bold text-success">84,2%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill bg-accent" style="width: 84.2%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Identifikasi tren & siklus pasar</p>
+                    </div>
+                    
+                    <!-- SMC -->
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium">SMC (Smart Money)</span>
+                            <span class="font-bold text-success">89,7%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill bg-accent" style="width: 89.7%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Struktur pasar & blok pesanan</p>
+                    </div>
+                    
+                    <!-- Price Action -->
+                    <div class="stat-card">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium">Price Action</span>
+                            <span class="font-bold text-success">86,1%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill bg-accent" style="width: 86.1%"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Pola harga & level kunci</p>
+                    </div>
+                </div>
+
+                <!-- Riwayat Kinerja Tahunan -->
+                <h3 class="text-xl font-semibold mb-4 text-center">Kinerja Tahunan</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="py-3 px-4">Tahun</th>
+                                <th class="py-3 px-4">Total Sinyal</th>
+                                <th class="py-3 px-4">Berhasil</th>
+                                <th class="py-3 px-4">Gagal</th>
+                                <th class="py-3 px-4">Akurasi</th>
+                                <th class="py-3 px-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-gray-800 hover:bg-secondary/40">
+                                <td class="py-3 px-4">2024</td>
+                                <td class="py-3 px-4">412</td>
+                                <td class="py-3 px-4">352</td>
+                                <td class="py-3 px-4">60</td>
+                                <td class="py-3 px-4 text-success font-medium">85,4%</td>
+                                <td class="py-3 px-4"><span class="px-2 py-1 bg-success/20 text-success text-xs rounded">Selesai</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-secondary/40">
+                                <td class="py-3 px-4">2025</td>
+                                <td class="py-3 px-4">586</td>
+                                <td class="py-3 px-4">517</td>
+                                <td class="py-3 px-4">69</td>
+                                <td class="py-3 px-4 text-success font-medium">88,2%</td>
+                                <td class="py-3 px-4"><span class="px-2 py-1 bg-success/20 text-success text-xs rounded">Selesai</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-secondary/40">
+                                <td class="py-3 px-4">2026 (S/d Juni)</td>
+                                <td class="py-3 px-4">249</td>
+                                <td class="py-3 px-4">221</td>
+                                <td class="py-3 px-4">28</td>
+                                <td class="py-3 px-4 text-success font-medium">88,7%</td>
+                                <td class="py-3 px-4"><span class="px-2 py-1 bg-accent/20 text-accent text-xs rounded">Berjalan</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Catatan Penting -->
+                <div class="mt-8 p-4 bg-warning/10 border border-warning/30 rounded-lg text-sm text-gray-300">
+                    <p class="font-semibold text-warning mb-1">Catatan:</p>
+                    <p>Persentase akurasi dihitung berdasarkan sinyal yang mencapai target keuntungan utama dengan rasio Risiko : Untung tetap dipertahankan 1:2. Data ini merupakan riwayat kinerja sejak website pertama kali diterbitkan dan diperbarui secara otomatis setiap hari. Kinerja masa lalu tidak menjamin hasil di masa depan, namun menjadi acuan konsistensi metode analisis kami.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contoh Sinyal Trading -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">Sinyal Trading Aktif</h2>
+            
+            <div class="bg-secondary rounded-xl p-6 border border-gray-700 max-w-3xl mx-auto">
+                <div class="flex flex-wrap justify-between items-center mb-4">
+                    <div>
+                        <span class="text-lg font-bold text-white">EUR/USD</span>
+                        <span class="ml-2 px-2 py-1 bg-success/20 text-success text-xs rounded-full">BELI</span>
+                    </div>
+                    <div class="text-sm text-gray-400">Diperbarui: 15 Juni 2026 20:00 WIB</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-primary/50 p-3 rounded-lg text-center">
+                        <div class="text-sm text-gray-400 mb-1">Titik Masuk</div>
+                        <div class="font-bold text-lg">1.0850</div>
+                    </div>
+                    <div class="bg-primary/50 p-3 rounded-lg text-center">
+                        <div class="text-sm text-gray-400 mb-1">Stop Loss</div>
+                        <div class="font-bold text-lg text-danger">1.0815</div>
+                    </div>
+                    <div class="bg-primary/50 p-3 rounded-lg text-center">
+                        <div class="text-sm text-gray-400 mb-1">Target Keuntungan</div>
+                        <div class="font-bold text-lg text-success">1.0920 / 1.0990</div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-accent">Analisis Lengkap:</h4>
+                    <ul class="list-disc pl-5 text-gray-300 space-y-1 text-sm">
+                        <li><strong>Elliott Wave:</strong> Harga menyelesaikan koreksi gelombang ke-2, sekarang masuk fase gelombang ke-3 yang biasanya pergerakan kuat dan panjang.</li>
+                        <li><strong>SMC:</strong> Harga kembali ke Zona Nilai Wajar (Value Area) dan memantul dari Blok Pesanan Pembeli; struktur pasar masih jelas naik.</li>
+                        <li><strong>Price Action:</strong> Terbentuk pola kandil <em>Pin Bar</em> dan <em>Bullish Engulfing</em> di level dukungan kunci, konfirmasi tekanan beli.</li>
+                    </ul>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-700 flex justify-between items-center">
+                    <span class="text-sm text-gray-400">Tingkat Kepercayaan: <span class="text-success font-medium">92%</span> | Rasio RR: <span class="text-warning font-medium">1:2</span></span>
+                    <button class="text-accent hover:underline text-sm">Lihat Grafik Lengkap</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary/80 border-t border-gray-700 py-8">
+        <div class="container mx-auto px-4 text-center text-gray-400 text-sm">
+            <p>© 2026 WaveSMC Pro | Analisis Teknikal Profesional: Elliott Wave + SMC + Price Action</p>
+            <p class="mt-2">*Peringatan: Trading berisiko tinggi, gunakan analisis ini sebagai bahan pertimbangan, bukan keputusan mutlak.</p>
+        </div>
+    </footer>
+
+    <!-- Script Dasar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi sederhana untuk bilah progres
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+
+            // Logika Filter Jenis Aset
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const contentBlocks = document.querySelectorAll('.data-content');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Hapus kelas aktif dari semua tombol
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.add('inactive');
+                    });
+                    // Tambahkan kelas aktif ke tombol yang diklik
+                    this.classList.remove('inactive');
+                    this.classList.add('active');
+
+                    const filterType = this.getAttribute('data-filter');
+
+                    // Sembunyikan semua konten
+                    contentBlocks.forEach(block => {
+                        block.classList.add('hidden');
+                    });
+                    // Tampilkan konten yang sesuai filter
+                    document.querySelectorAll(`.data-content[data-type="${filterType}"]`).forEach(block => {
+                        block.classList.remove('hidden');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
