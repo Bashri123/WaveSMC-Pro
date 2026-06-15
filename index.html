@@ -146,9 +146,9 @@
     </div>
 
     <script>
-        // 👇 TEMPEL LINK BARU ANDA DI SINI 👇
-        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbzKIdtGXgk3YKlJdulSqwFxYxUsqGSNPdanq5jNo1nvEMHk50Gd9Cycq0TNWZr7GMU7qw/exec"; 
-        // 👆 GANTI LINK INI DENGAN LINK YANG BARU ANDA DAPATKAN SAAT INI
+        // 👇 TEMPEL LINK DATABASE ANDA DI SINI 👇
+        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbyOR6aMgwGu1WiytqxPIazgezHNv2cHf4kHj-1kxN_DHGJBHmZ5L7uqgpXg0oHJ2XEN/exec"; 
+        // 👆 GANTI DENGAN LINK PUNYA ANDA SENDIRI
 
         function bukaHalaman(nama) {
             document.getElementById('halamanAwal').style.display = (nama === 'awal') ? 'flex' : 'none';
@@ -156,7 +156,7 @@
             document.getElementById('halamanLogin').style.display = (nama === 'login') ? 'flex' : 'none';
         }
 
-        // FUNGSI DAFTAR - DIPERBAIKI SISTEMNYA
+        // PERBAIKAN UTAMA: CARA MENGIRIM DATA YANG BENAR
         async function prosesDaftar() {
             const nama = document.getElementById('reg_nama').value.trim();
             const email = document.getElementById('reg_email').value.trim();
@@ -176,19 +176,13 @@
             pesan.classList.remove('hidden');
 
             try {
-                // Metode pengiriman yang diperbaiki
-                const formData = new FormData();
-                formData.append('NamaLengkap', nama);
-                formData.append('Email', email);
-                formData.append('Username', user);
-                formData.append('Password', pass);
+                // Cara kirim data yang dijamin masuk ke Google Sheet
+                const response = await fetch(LINK_DATABASE + 
+                    `?NamaLengkap=${encodeURIComponent(nama)}&Email=${encodeURIComponent(email)}&Username=${encodeURIComponent(user)}&Password=${encodeURIComponent(pass)}`, 
+                    { method: 'GET' }
+                );
 
-                const res = await fetch(LINK_DATABASE, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const hasil = await res.json();
+                const hasil = await response.json();
 
                 if(hasil.status === "sukses") {
                     pesan.className = 'text-sm p-2 rounded text-center bg-green-50 text-success';
@@ -200,7 +194,7 @@
                 }
             } catch (e) {
                 pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
-                pesan.innerText = "❌ Kesalahan koneksi / Izin belum benar";
+                pesan.innerText = "❌ Kesalahan koneksi, coba lagi.";
             }
         }
 
@@ -222,7 +216,7 @@
             pesan.classList.remove('hidden');
 
             try {
-                const res = await fetch(LINK_DATABASE + "?action=get");
+                const res = await fetch(LINK_DATABASE);
                 const data = await res.json();
                 
                 let sukses = false;
