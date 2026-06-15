@@ -32,8 +32,8 @@
             .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
             .pulse { animation: pulse 1s infinite; }
             @keyframes pulse { 0% {opacity:1;} 50% {opacity:0.5;} 100% {opacity:1;} }
-            .naik { color: #10B981; transition: all 0.3s; }
-            .turun { color: #EF4444; transition: all 0.3s; }
+            .naik { color: #10B981; transition: all 0.3s; font-weight: bold; }
+            .turun { color: #EF4444; transition: all 0.3s; font-weight: bold; }
         }
     </style>
 </head>
@@ -223,7 +223,7 @@
 
     <script>
         // 👇 TEMPEL LINK BARU YANG BARU KAMU DAPAT DI SINI 👇
-        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbx2C3gL-FjfV6stqhTNztgK6dbiWgBWWbKhUeORX1T-lVg1zF98NBEkUd1iXKE_7JUw/exec"; 
+        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbwidVia1WpVF8jepAnht-Yh0xwFyG8zar1Ll--pgzUxkgHj6OZbfeYfPPkSZ0MMGY-N/exec"; 
         // 👆 GANTI LINK DI ATAS DENGAN LINK BARU SAJA!
 
         let dataHargaLama = {}; // Simpan harga sebelumnya untuk cek naik/turun
@@ -313,7 +313,7 @@
                     
                     // ✅ MULAI PEMBARUAN HARGA SETIAP 5 DETIK
                     perbaruiHargaDanPerhitungan();
-                    setInterval(perbaruiHargaDanPerhitungan, 5000); // 5000 ms = 5 detik
+                    setInterval(perbaruiHargaDanPerhitungan, 5000); // 5 detik
 
                 } else {
                     pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
@@ -340,7 +340,7 @@
                 tampilkanAngka('harga_gbpjpy', h.gbpjpy, dataHargaLama.gbpjpy);
                 tampilkanAngka('harga_xauusd', h.xauusd, dataHargaLama.xauusd);
 
-                // SIMPAN HARGA BARU UNTUK PERBANDINGAN BERIKUTNYA
+                // SIMPAN HARGA BARU
                 dataHargaLama = {...h};
 
                 // ✅ HITUNG DAN TAMPILKAN RISK REWARD OTOMATIS
@@ -401,7 +401,11 @@
 
             // HITUNG & BUAT BARIS TABEL
             daftar.forEach(item => {
-                const hargaSekarang = parseFloat(h[item.nama.split('/')[0].toLowerCase() + (item.nama.includes('XAU') ? 'xauusd' : item.nama.includes('GBP') ? 'gbpjpy' : 'eurusd')]);
+                // Ambil harga sekarang dari data
+                let hargaSekarang;
+                if(item.nama === "EUR/USD") hargaSekarang = parseFloat(h.eurusd);
+                if(item.nama === "GBP/JPY") hargaSekarang = parseFloat(h.gbpjpy);
+                if(item.nama === "XAU/USD (EMAS)") hargaSekarang = parseFloat(h.xauusd);
                 
                 // RUMUS PERHITUNGAN RR
                 let jarakRisiko = Math.abs(item.sl - parseFloat(item.masuk.split(' - ')[0]));
