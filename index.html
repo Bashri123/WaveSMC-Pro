@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Sinyal - Sistem Anggota</title>
+    <title>ProTrading | Analisis Teknikal Profesional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -11,11 +11,12 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#165DFF',
-                        dark: '#1D2129',
-                        light: '#F2F3F5',
-                        success: '#00B42A',
-                        danger: '#F53F3F',
+                        primary: '#0F172A',
+                        secondary: '#1E293B',
+                        accent: '#0EA5E9',
+                        success: '#10B981',
+                        danger: '#EF4444',
+                        light: '#F8FAFC',
                     },
                     fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
                 }
@@ -27,128 +28,204 @@
             .content-auto { content-visibility: auto; }
             .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
             .scrollbar-hide::-webkit-scrollbar { display: none; }
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans">
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen font-sans text-white">
 
-    <!-- HALAMAN PILIH -->
+    <!-- HALAMAN AWAL -->
     <div id="halamanAwal" class="flex items-center justify-center min-h-screen px-4">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 text-center">
-            <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fa fa-chart-line text-primary text-3xl"></i>
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-md p-8 text-center border border-white/20">
+            <div class="w-24 h-24 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-5">
+                <i class="fa fa-line-chart text-accent text-4xl"></i>
             </div>
-            <h2 class="text-2xl font-bold text-dark mb-2">TRADING SINYAL</h2>
-            <p class="text-gray-500 mb-8">Akses sinyal dan analisis pasar terpercaya</p>
+            <h1 class="text-3xl font-bold text-white mb-2">PROTRADING</h1>
+            <p class="text-slate-300 mb-8">Analisis Teknikal Profesional | Elliott Wave • SMC • Price Action</p>
             <div class="space-y-4">
-                <button onclick="bukaHalaman('login')" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-lg hover:shadow-primary/30">SUDAH PUNYA AKUN? MASUK</button>
-                <button onclick="bukaHalaman('daftar')" class="w-full bg-white hover:bg-light text-primary border-2 border-primary font-semibold py-3 px-4 rounded-lg transition-all">DAFTAR AKUN BARU</button>
+                <button onclick="bukaHalaman('login')" class="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-accent/30">MASUK KE SISTEM</button>
+                <button onclick="bukaHalaman('daftar')" class="w-full bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold py-3.5 px-4 rounded-xl transition-all">DAFTAR AKUN ANGGOTA</button>
             </div>
         </div>
     </div>
 
     <!-- HALAMAN DAFTAR -->
     <div id="halamanDaftar" class="hidden flex items-center justify-center min-h-screen px-4">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-md p-8 border border-white/20">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-dark">Buat Akun Baru</h2>
-                <p class="text-gray-500 text-sm">Isi data di bawah ini untuk mendaftar</p>
+                <h2 class="text-2xl font-bold text-white">Buat Akun Baru</h2>
+                <p class="text-slate-300 text-sm">Isi data di bawah ini untuk mendaftar</p>
             </div>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                    <input type="text" id="reg_nama" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Contoh: Ahmad Bashri">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Nama Lengkap</label>
+                    <input type="text" id="reg_nama" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="Nama Anda">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" id="reg_email" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="email@contoh.com">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                    <input type="email" id="reg_email" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="email@anda.com">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pengguna</label>
-                    <input type="text" id="reg_user" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Buat nama pengguna">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Nama Pengguna</label>
+                    <input type="text" id="reg_user" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="Buat nama pengguna">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
-                    <input type="password" id="reg_pass" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Buat kata sandi">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Kata Sandi</label>
+                    <input type="password" id="reg_pass" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="Buat kata sandi">
                 </div>
-                <div id="pesanDaftar" class="hidden text-sm p-2 rounded text-center"></div>
-                <button onclick="prosesDaftar()" class="w-full bg-success hover:bg-success/90 text-white font-semibold py-3 px-4 rounded-lg transition-all">DAFTAR SEKARANG</button>
-                <p class="text-center text-sm text-gray-600 mt-2">Sudah punya akun? <a onclick="bukaHalaman('login')" class="text-primary font-semibold cursor-pointer">Masuk di sini</a></p>
+                <div id="pesanDaftar" class="hidden text-sm p-3 rounded-lg text-center"></div>
+                <button onclick="prosesDaftar()" class="w-full bg-success hover:bg-success/90 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-lg">DAFTAR SEKARANG</button>
+                <p class="text-center text-sm text-slate-300 mt-2">Sudah punya akun? <a onclick="bukaHalaman('login')" class="text-accent font-semibold cursor-pointer">Masuk di sini</a></p>
             </div>
         </div>
     </div>
 
     <!-- HALAMAN LOGIN -->
     <div id="halamanLogin" class="hidden flex items-center justify-center min-h-screen px-4">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-md p-8 border border-white/20">
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-dark">Masuk Akun</h2>
-                <p class="text-gray-500 text-sm">Selamat datang kembali!</p>
+                <h2 class="text-2xl font-bold text-white">Masuk Sistem</h2>
+                <p class="text-slate-300 text-sm">Akses analisis dan sinyal eksklusif</p>
             </div>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pengguna</label>
-                    <input type="text" id="login_user" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Masukkan nama pengguna">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Nama Pengguna</label>
+                    <input type="text" id="login_user" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="Masukkan nama pengguna">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Kata Sandi</label>
-                    <input type="password" id="login_pass" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Masukkan kata sandi">
+                    <label class="block text-sm font-medium text-slate-300 mb-1">Kata Sandi</label>
+                    <input type="password" id="login_pass" class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none text-white" placeholder="Masukkan kata sandi">
                 </div>
-                <div id="pesanLogin" class="hidden text-sm p-2 rounded text-center"></div>
-                <button onclick="prosesLogin()" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-lg transition-all">MASUK</button>
-                <p class="text-center text-sm text-gray-600 mt-2">Belum punya akun? <a onclick="bukaHalaman('daftar')" class="text-primary font-semibold cursor-pointer">Daftar di sini</a></p>
+                <div id="pesanLogin" class="hidden text-sm p-3 rounded-lg text-center"></div>
+                <button onclick="prosesLogin()" class="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 px-4 rounded-lg transition-all shadow-lg">MASUK</button>
+                <p class="text-center text-sm text-slate-300 mt-2">Belum punya akun? <a onclick="bukaHalaman('daftar')" class="text-accent font-semibold cursor-pointer">Daftar di sini</a></p>
             </div>
         </div>
     </div>
 
-    <!-- HALAMAN UTAMA -->
-    <div id="halamanDashboard" class="hidden min-h-screen bg-gray-50">
-        <header class="bg-white shadow-md sticky top-0 z-50">
+    <!-- HALAMAN UTAMA: ANALISIS TRADING -->
+    <div id="halamanDashboard" class="hidden min-h-screen bg-slate-900">
+        <header class="bg-slate-800/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-slate-700">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">TS</div>
-                    <h1 class="text-xl font-bold text-dark">Trading Sinyal</h1>
+                    <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center text-white font-bold text-lg">PT</div>
+                    <h1 class="text-xl font-bold text-white">PROTRADING ANALYSIS</h1>
                 </div>
-                <button onclick="keluarAkun()" class="text-gray-600 hover:text-primary flex items-center gap-2 transition-colors">
-                    <i class="fa fa-sign-out"></i> <span class="hidden sm:inline">Keluar</span>
-                </button>
+                <div class="flex items-center gap-4">
+                    <span class="text-slate-300 text-sm hidden sm:inline">Selamat datang, <span id="namaPengguna" class="font-semibold text-white"></span></span>
+                    <button onclick="keluarAkun()" class="text-slate-300 hover:text-accent flex items-center gap-2 transition-colors">
+                        <i class="fa fa-sign-out"></i> <span class="hidden sm:inline">Keluar</span>
+                    </button>
+                </div>
             </div>
         </header>
+
         <main class="container mx-auto px-4 py-8">
-            <div class="max-w-5xl mx-auto">
-                <div class="bg-gradient-to-r from-primary to-blue-600 text-white rounded-2xl p-6 md:p-8 mb-8 shadow-lg">
-                    <h2 class="text-2xl font-bold mb-2">Selamat Datang, <span id="namaPengguna"></span>!</h2>
-                    <p class="text-blue-100">Berikut adalah sinyal dan analisis pasar terupdate khusus anggota terdaftar.</p>
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-gradient-to-r from-accent/20 to-blue-600/20 border border-accent/30 rounded-2xl p-6 md:p-8 mb-8 shadow-xl backdrop-blur-sm">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 text-shadow">Analisis Pasar Terkini</h2>
+                    <p class="text-slate-300">Metode Gabungan: <span class="font-semibold text-white">Elliott Wave Theory • SMC • Smart Money Concept • Price Action</span></p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4"><i class="fa fa-line-chart text-xl"></i></div>
-                        <h3 class="text-lg font-bold text-dark mb-2">Sinyal Aktif Hari Ini</h3>
-                        <div class="space-y-2 text-sm mt-4">
-                            <div class="flex justify-between items-center p-2 bg-green-50 rounded"><span>EUR/USD</span><span class="font-semibold text-green-600">BELI ⬆️</span></div>
-                            <div class="flex justify-between items-center p-2 bg-red-50 rounded"><span>GBP/JPY</span><span class="font-semibold text-red-600">JUAL ⬇️</span></div>
-                            <div class="flex justify-between items-center p-2 bg-green-50 rounded"><span>XAU/USD</span><span class="font-semibold text-green-600">BELI ⬆️</span></div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4"><i class="fa fa-bar-chart text-xl"></i></div>
-                        <h3 class="text-lg font-bold text-dark mb-2">Analisis Pasar</h3>
-                        <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
-                            <li>Tren pasar cenderung naik pada sesi Eropa.</li>
-                            <li>Perhatikan rilis data inflasi nanti malam.</li>
-                            <li>Dukungan utama berada di level 1.0850.</li>
-                            <li>Resistensi terdekat di angka 1.0920.</li>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <div class="bg-slate-800/70 border border-slate-700 rounded-xl p-6 shadow-lg hover:border-accent/40 transition-all">
+                        <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-lg flex items-center justify-center mb-4"><i class="fa fa-waveform text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-2">Elliott Wave</h3>
+                        <p class="text-slate-300 text-sm mb-3">Mengidentifikasi siklus pasar: 5 gelombang impulsif + 3 gelombang korektif.</p>
+                        <ul class="space-y-1 text-sm text-slate-300 list-disc list-inside">
+                            <li>Saat ini: Gelombang <span class="text-success font-bold">3 (Naik)</span></li>
+                            <li>Target: 1.0950 - 1.1000</li>
+                            <li>Batas Batal: 1.0780</li>
                         </ul>
                     </div>
+
+                    <div class="bg-slate-800/70 border border-slate-700 rounded-xl p-6 shadow-lg hover:border-accent/40 transition-all">
+                        <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-lg flex items-center justify-center mb-4"><i class="fa fa-bank text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-2">Smart Money Concept</h3>
+                        <p class="text-slate-300 text-sm mb-3">Membaca pergerakan modal besar, Likuiditas, dan Struktur Pasar.</p>
+                        <ul class="space-y-1 text-sm text-slate-300 list-disc list-inside">
+                            <li>Struktur: <span class="text-success font-bold">Uptrend</span></li>
+                            <li>Liquidity Grab: Terbentuk di bawah 1.0820</li>
+                            <li>Order Block: Zona Beli 1.0840 - 1.0860</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-800/70 border border-slate-700 rounded-xl p-6 shadow-lg hover:border-accent/40 transition-all">
+                        <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-lg flex items-center justify-center mb-4"><i class="fa fa-line-chart text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-2">Price Action</h3>
+                        <p class="text-slate-300 text-sm mb-3">Analisis murni pergerakan harga, pola kandil, dan level kunci.</p>
+                        <ul class="space-y-1 text-sm text-slate-300 list-disc list-inside">
+                            <li>Pola: <span class="text-success font-bold">Bullish Engulfing</span></li>
+                            <li>Dukungan Utama: 1.0830</li>
+                            <li>Resistensi Utama: 1.0940</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/70 border border-slate-700 rounded-xl p-6 shadow-xl mb-8">
+                    <h3 class="text-xl font-bold text-white mb-5 flex items-center gap-2"><i class="fa fa-signal text-accent"></i> SINYAL TRADING AKTIF</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b border-slate-700">
+                                    <th class="py-3 px-2 text-slate-300">Pasangan Mata Uang</th>
+                                    <th class="py-3 px-2 text-slate-300">Sinyal</th>
+                                    <th class="py-3 px-2 text-slate-300">Zona Masuk</th>
+                                    <th class="py-3 px-2 text-slate-300">Target 1</th>
+                                    <th class="py-3 px-2 text-slate-300">Target 2</th>
+                                    <th class="py-3 px-2 text-slate-300">Stop Loss</th>
+                                    <th class="py-3 px-2 text-slate-300">Metode</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-700">
+                                <tr class="hover:bg-slate-700/50 transition-colors">
+                                    <td class="py-4 px-2 font-semibold">EUR/USD</td>
+                                    <td class="py-4 px-2"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs font-bold">BELI ⬆️</span></td>
+                                    <td class="py-4 px-2">1.0840 - 1.0860</td>
+                                    <td class="py-4 px-2">1.0920</td>
+                                    <td class="py-4 px-2">1.0980</td>
+                                    <td class="py-4 px-2 text-danger">1.0770</td>
+                                    <td class="py-4 px-2 text-xs">Elliott + SMC</td>
+                                </tr>
+                                <tr class="hover:bg-slate-700/50 transition-colors">
+                                    <td class="py-4 px-2 font-semibold">GBP/JPY</td>
+                                    <td class="py-4 px-2"><span class="bg-danger/20 text-danger px-2 py-1 rounded text-xs font-bold">JUAL ⬇️</span></td>
+                                    <td class="py-4 px-2">185.40 - 185.60</td>
+                                    <td class="py-4 px-2">184.80</td>
+                                    <td class="py-4 px-2">184.20</td>
+                                    <td class="py-4 px-2 text-success">186.10</td>
+                                    <td class="py-4 px-2 text-xs">SMC + Price Action</td>
+                                </tr>
+                                <tr class="hover:bg-slate-700/50 transition-colors">
+                                    <td class="py-4 px-2 font-semibold">XAU/USD (EMAS)</td>
+                                    <td class="py-4 px-2"><span class="bg-success/20 text-success px-2 py-1 rounded text-xs font-bold">BELI ⬆️</span></td>
+                                    <td class="py-4 px-2">2320.00 - 2323.00</td>
+                                    <td class="py-4 px-2">2340.00</td>
+                                    <td class="py-4 px-2">2355.00</td>
+                                    <td class="py-4 px-2 text-danger">2310.00</td>
+                                    <td class="py-4 px-2 text-xs">Semua Metode</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-5">
+                    <h4 class="font-bold text-white mb-2">📝 Catatan Analisis Teknikal:</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Berdasarkan gabungan ketiga metode, pasar saat ini menunjukkan kekuatan pembeli yang dominan namun sedang melakukan koreksi kecil. 
+                        <b>Elliott Wave</b> menandakan kita masih dalam gelombang utama kenaikan, <b>SMC</b> menunjukkan likuiditas di bawah sudah diambil harga siap melanjutkan tren, dan <b>Price Action</b> membentuk pola lanjutan yang valid. 
+                        Fokus utama pada zona pembelian yang sudah ditentukan, hindari masuk pasar di tengah jalan.
+                    </p>
                 </div>
             </div>
         </main>
     </div>
 
     <script>
-        // 👇 TEMPEL LINK DATABASE ANDA DI SINI 👇
-        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycby_r-fmLkGn5hx32PzTt0wEm8PR1ifFiRzfQXEyVANl4GJutQ3oVbW8h3636aH1vsh6/exec "; 
-        // 👆 GANTI DENGAN LINK PUNYA ANDA SENDIRI
+        // 👇 TEMPEL LINK BARU YANG BARU KAMU DAPAT DI SINI 👇
+        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbxSf3ldxyIRsDfGqRmKjCAAQZDaq6yj1o68BfypZD6KzBDllwVWwxtbFXfG1pIxXl8a/exec"; 
+        // 👆 GANTI LINK DI ATAS DENGAN LINK BARU SAJA!
 
         function bukaHalaman(nama) {
             document.getElementById('halamanAwal').style.display = (nama === 'awal') ? 'flex' : 'none';
@@ -156,7 +233,7 @@
             document.getElementById('halamanLogin').style.display = (nama === 'login') ? 'flex' : 'none';
         }
 
-        // PERBAIKAN UTAMA: CARA MENGIRIM DATA YANG BENAR
+        // ✅ PROSES DAFTAR DIPERBAIKI TOTAL (PAKAI METODE BARU)
         async function prosesDaftar() {
             const nama = document.getElementById('reg_nama').value.trim();
             const email = document.getElementById('reg_email').value.trim();
@@ -165,77 +242,80 @@
             const pesan = document.getElementById('pesanDaftar');
 
             if(!nama || !email || !user || !pass) {
-                pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
+                pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
                 pesan.innerText = "❌ Semua kolom wajib diisi!";
                 pesan.classList.remove('hidden');
                 return;
             }
 
-            pesan.className = 'text-sm p-2 rounded text-center bg-blue-50 text-blue-600';
-            pesan.innerText = "⏳ Sedang memproses...";
+            pesan.className = 'text-sm p-3 rounded-lg text-center bg-accent/20 text-accent border border-accent/30';
+            pesan.innerText = "⏳ Memproses pendaftaran...";
             pesan.classList.remove('hidden');
 
             try {
-                // Cara kirim data yang dijamin masuk ke Google Sheet
-                const response = await fetch(LINK_DATABASE + 
-                    `?NamaLengkap=${encodeURIComponent(nama)}&Email=${encodeURIComponent(email)}&Username=${encodeURIComponent(user)}&Password=${encodeURIComponent(pass)}`, 
-                    { method: 'GET' }
-                );
+                const res = await fetch(LINK_DATABASE, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ NamaLengkap:nama, Email:email, Username:user, Password:pass })
+                });
 
-                const hasil = await response.json();
+                const hasil = await res.json();
 
                 if(hasil.status === "sukses") {
-                    pesan.className = 'text-sm p-2 rounded text-center bg-green-50 text-success';
-                    pesan.innerText = "✅ Pendaftaran Berhasil! Silakan Login.";
+                    pesan.className = 'text-sm p-3 rounded-lg text-center bg-success/20 text-success border border-success/30';
+                    pesan.innerText = hasil.pesan;
                     setTimeout(() => bukaHalaman('login'), 2000);
                 } else {
-                    pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
-                    pesan.innerText = "❌ Gagal: " + hasil.pesan;
+                    pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
+                    pesan.innerText = hasil.pesan;
                 }
             } catch (e) {
-                pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
-                pesan.innerText = "❌ Kesalahan koneksi, coba lagi.";
+                pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
+                pesan.innerText = "❌ Kesalahan koneksi, coba ulang lagi";
             }
         }
 
-        // FUNGSI LOGIN
+        // ✅ PROSES LOGIN DIPERBAIKI
         async function prosesLogin() {
             const userInput = document.getElementById('login_user').value.trim();
             const passInput = document.getElementById('login_pass').value.trim();
             const pesan = document.getElementById('pesanLogin');
 
             if(!userInput || !passInput) {
-                pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
+                pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
                 pesan.innerText = "❌ Isi nama pengguna dan sandi!";
                 pesan.classList.remove('hidden');
                 return;
             }
 
-            pesan.className = 'text-sm p-2 rounded text-center bg-blue-50 text-blue-600';
+            pesan.className = 'text-sm p-3 rounded-lg text-center bg-accent/20 text-accent border border-accent/30';
             pesan.innerText = "⏳ Memeriksa data...";
             pesan.classList.remove('hidden');
 
             try {
-                const res = await fetch(LINK_DATABASE);
+                const res = await fetch(LINK_DATABASE + "?cek=" + Math.random());
                 const data = await res.json();
                 
                 let sukses = false;
+                let namaPengguna = "";
+
                 data.forEach(akun => {
-                    if(akun[3] === userInput && akun[4] === passInput) {
+                    if(akun[3] === userInput && akun[4] === passInput && akun[5] === "Aktif") {
                         sukses = true;
-                        document.getElementById('namaPengguna').innerText = akun[1];
+                        namaPengguna = akun[1];
                     }
                 });
 
                 if(sukses) {
+                    document.getElementById('namaPengguna').innerText = namaPengguna;
                     document.getElementById('halamanLogin').style.display = 'none';
                     document.getElementById('halamanDashboard').style.display = 'block';
                 } else {
-                    pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
-                    pesan.innerText = "❌ Nama pengguna atau sandi salah!";
+                    pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
+                    pesan.innerText = "❌ Nama pengguna / sandi salah";
                 }
             } catch (e) {
-                pesan.className = 'text-sm p-2 rounded text-center bg-red-50 text-danger';
+                pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
                 pesan.innerText = "❌ Tidak bisa terhubung ke database";
             }
         }
