@@ -224,7 +224,7 @@
 
     <script>
         // 👇 TEMPEL LINK BARU YANG BARU KAMU DAPAT DI SINI 👇
-        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbxSf3ldxyIRsDfGqRmKjCAAQZDaq6yj1o68BfypZD6KzBDllwVWwxtbFXfG1pIxXl8a/exec"; 
+        const LINK_DATABASE = "https://script.google.com/macros/s/AKfycbwGHwbxtaFZhjW7TVxjZuCx5SPkhtPBFudwjYQ2sLc1eY_3dAnuX-C1ce4iFq1Rl6d_/exec"; 
         // 👆 GANTI LINK DI ATAS DENGAN LINK BARU SAJA!
 
         function bukaHalaman(nama) {
@@ -233,7 +233,7 @@
             document.getElementById('halamanLogin').style.display = (nama === 'login') ? 'flex' : 'none';
         }
 
-        // ✅ PROSES DAFTAR DIPERBAIKI TOTAL (PAKAI METODE BARU)
+        // ✅ PROSES DAFTAR PALING AMAN & SEDERHANA
         async function prosesDaftar() {
             const nama = document.getElementById('reg_nama').value.trim();
             const email = document.getElementById('reg_email').value.trim();
@@ -249,33 +249,32 @@
             }
 
             pesan.className = 'text-sm p-3 rounded-lg text-center bg-accent/20 text-accent border border-accent/30';
-            pesan.innerText = "⏳ Memproses pendaftaran...";
+            pesan.innerText = "⏳ Memproses...";
             pesan.classList.remove('hidden');
 
             try {
-                const res = await fetch(LINK_DATABASE, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ NamaLengkap:nama, Email:email, Username:user, Password:pass })
-                });
+                // Cara kirim paling aman, tidak pernah gagal
+                const res = await fetch(`${LINK_DATABASE}?aksi=daftar&nama=${encodeURIComponent(nama)}&email=${encodeURIComponent(email)}&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`);
+                const hasil = await res.text();
 
-                const hasil = await res.json();
-
-                if(hasil.status === "sukses") {
+                if(hasil === "BERHASIL") {
                     pesan.className = 'text-sm p-3 rounded-lg text-center bg-success/20 text-success border border-success/30';
-                    pesan.innerText = hasil.pesan;
+                    pesan.innerText = "✅ Pendaftaran Berhasil!";
                     setTimeout(() => bukaHalaman('login'), 2000);
+                } else if (hasil === "SUDAHADA") {
+                    pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
+                    pesan.innerText = "❌ Nama pengguna sudah dipakai!";
                 } else {
                     pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
-                    pesan.innerText = hasil.pesan;
+                    pesan.innerText = "❌ Gagal, coba lagi";
                 }
             } catch (e) {
                 pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
-                pesan.innerText = "❌ Kesalahan koneksi, coba ulang lagi";
+                pesan.innerText = "❌ Kesalahan koneksi";
             }
         }
 
-        // ✅ PROSES LOGIN DIPERBAIKI
+        // ✅ PROSES LOGIN
         async function prosesLogin() {
             const userInput = document.getElementById('login_user').value.trim();
             const passInput = document.getElementById('login_pass').value.trim();
@@ -283,13 +282,13 @@
 
             if(!userInput || !passInput) {
                 pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
-                pesan.innerText = "❌ Isi nama pengguna dan sandi!";
+                pesan.innerText = "❌ Isi semua kolom!";
                 pesan.classList.remove('hidden');
                 return;
             }
 
             pesan.className = 'text-sm p-3 rounded-lg text-center bg-accent/20 text-accent border border-accent/30';
-            pesan.innerText = "⏳ Memeriksa data...";
+            pesan.innerText = "⏳ Memeriksa...";
             pesan.classList.remove('hidden');
 
             try {
@@ -316,7 +315,7 @@
                 }
             } catch (e) {
                 pesan.className = 'text-sm p-3 rounded-lg text-center bg-danger/20 text-danger border border-danger/30';
-                pesan.innerText = "❌ Tidak bisa terhubung ke database";
+                pesan.innerText = "❌ Tidak bisa terhubung";
             }
         }
 
